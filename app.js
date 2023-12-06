@@ -35,6 +35,11 @@ const limiter= rateLimit({windowMs:15*60*1000,max:3000})
 app.use(limiter)
 
 
+app.get("/",(req,res)=>{
+res.send("Hello this is Create page");
+})
+
+
 app.use("/api/v1",router)
 
 
