@@ -10,5 +10,5 @@ const DataScema = mongoose.Schema({
 })
 
 
-const CategoryModel = mongoose.model('Category',DataScema);
+const CategoryModel = mongoose.model('categories',DataScema);
 module.exports = CategoryModel;

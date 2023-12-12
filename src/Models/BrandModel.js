@@ -10,6 +10,6 @@ const DataScema = mongoose.Schema({
 })
 
 
-const BarandModel = mongoose.model('brand',DataScema)
+const BarandModel = mongoose.model('brands',DataScema)
 
 module.exports = BarandModel;

@@ -7,5 +7,5 @@ const DataScema = mongoose.Schema({
     timestamps:true,versionKey:false
 })
 
-const WishModel = mongoose.model('profiles',DataScema);
+const WishModel = mongoose.model('wishes',DataScema);
 module.exports = WishModel;

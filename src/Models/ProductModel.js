@@ -12,7 +12,7 @@ const DataScema = mongoose.Schema({
     remark:{type:String,require:true},
     categoryID:{type:mongoose.Schema.Types.ObjectId,require:true},
 
-    brandID:{type:mongoose.Schema.type.ObjectId,require:true}
+    brandID:{type:mongoose.Schema.Types.ObjectId,require:true}
 },
 {
     timestamps:true,versionKey:false

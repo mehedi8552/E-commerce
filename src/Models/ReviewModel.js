@@ -9,5 +9,5 @@ const DataScema = mongoose.Schema({
     timestamps:true,versionKey:false
 })
 
-const ReviewModel = mongoose.model('profiles',DataScema);
+const ReviewModel = mongoose.model('reviews',DataScema);
 module.exports = ReviewModel;

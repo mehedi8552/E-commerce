@@ -11,5 +11,5 @@ const DataScema = mongoose.Schema({
     timestamps:true,versionKey:false
 })
 
-const CardModel = mongoose.model('profiles',DataScema);
+const CardModel = mongoose.model('carts',DataScema);
 module.exports = CardModel;
