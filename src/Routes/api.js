@@ -8,13 +8,16 @@ const router = express.Router();
 router.get('/ProducBrandList',ProductController.ProducBrandList)
 router.get('/ProducCategoryList',ProductController.ProducCategoryList)
 router.get('/ProducSliderList',ProductController.ProducSliderList)
-router.get('/ProducListByBrand/:BrandID',ProductController.ProducListByBrand)
-router.get('/ProducListByCategory/:CategoryID',ProductController.ProducListByCategory)
-router.get('/ProducListBySimiler/:Keyword',ProductController.ProducListBySimiler)
-router.get('/ProducListByKeyword/:Keyword',ProductController.ProducListByKeyword)
-router.get('/ProductListByRemark/:Remark',ProductController.ProductListByRemark)
-router.get('/ProductDetails/:ProductID',ProductController.ProductDetails)
-router.get('/ProductReviewList/:ProductID',ProductController.ProductReviewList)
+
+router.get('/ProducListByBrand/:brandID',ProductController.ProducListByBrand)
+router.get('/ProducListByCategory/:categoryID',ProductController.ProducListByCategory)
+router.get('/ProductListByRemark/:remark',ProductController.ProductListByRemark)
+
+router.get('/ProducListBySimiler/:categoryID',ProductController.ProducListBySimiler)
+router.get('/ProducListByKeyword/:keyword',ProductController.ProducListByKeyword)
+
+router.get('/ProductDetails/:productID',ProductController.ProductDetails)
+router.get('/ProductReviewList/:productID',ProductController.ProductReviewList)
 
 
 
