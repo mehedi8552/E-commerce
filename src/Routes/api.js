@@ -1,5 +1,6 @@
 const express = require('express');
-const ProductController = require ('../Controllers/ProductController.js')
+const ProductController = require ('../Controllers/ProductController.js');
+const UserController = require('../Controllers/UserController.js');
 
 const router = express.Router();
 
@@ -19,6 +20,9 @@ router.get('/ProducListByKeyword/:keyword',ProductController.ProducListByKeyword
 router.get('/ProductDetails/:productID',ProductController.ProductDetails)
 router.get('/ProductReviewList/:productID',ProductController.ProductReviewList)
 
+//UserController Api section.....
+
+router.get('/UserOTP/:email',UserController.UserOTP);
 
 
 
