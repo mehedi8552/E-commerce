@@ -8,7 +8,6 @@ const DataScema = mongoose.Schema({
     cus_fax:{type:String},
     cus_name:{type:String},
     cus_phone:{type:String},
-    cus_country:{type:String},
     cus_postcode:{type:String},
     cus_state:{type:String},
     ship_add:{type:String},

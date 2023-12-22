@@ -3,16 +3,13 @@ const { DecodeTocken } = require("../Utility/TokenHelper")
 
 
 module.exports = (req,res,next)=>{
-
-    let token = req.headers['token']
-
-    if(!token){
-        token = req.coockies['token']
-    }
+    //console.log((req.headers.cookie).splice(0,5));
+    let token = req.cookies.token;
+    //console.log(token);
 
     let decoded = DecodeTocken(token)
 
-    if(decoded==null){
+    if(decoded===null){
         return res.status(401).json({status:"failed",message:"Unauthorized"})
     }
     else{

@@ -36,8 +36,7 @@ app.use(hpp())
 app.use(bodyParser.json())
 
 app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
-
+app.use(express.urlencoded({extended:true}));
 
 const limiter= rateLimit({windowMs:15*60*1000,max:3000})
 app.use(limiter)
