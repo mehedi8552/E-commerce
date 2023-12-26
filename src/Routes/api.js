@@ -2,8 +2,8 @@ const express = require('express');
 const ProductController = require ('../Controllers/ProductController.js');
 const UserController = require('../Controllers/UserController.js');
 const AuthVerification = require('../Middlewares/AuthVerification.js');
-
 const WishListController = require('../Controllers/WishListController');
+const CardController = require('../Controllers/CardListController.js')
 
 const router = express.Router();
 
@@ -39,6 +39,12 @@ router.post('/ReadProfile',AuthVerification,UserController.ReadProfile);
 router.post('/Wishlist',AuthVerification,WishListController.Wishlist);
 router.post('/RemoveWishlist',AuthVerification,WishListController.RemoveWishlist);
 router.post('/SaveWishlist',AuthVerification,WishListController.SaveWishlist);
+
+
+//Cardlist Controller......
+router.post('/SaveCartList',AuthVerification,CardController.SaveCartListContriller)
+router.post('/RemoveCartList',AuthVerification,CardController.RemoveCartListContriller)
+router.get('/CartList',AuthVerification,CardController.CartListContriller)
 
 
 

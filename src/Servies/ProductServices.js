@@ -94,10 +94,6 @@ catch (e) {
 }
 
 
-
-
-
-
 const ListBySimilerService= async (req)=>{
   try{
     let categoryID=new ObjectId(req.params.categoryID)
