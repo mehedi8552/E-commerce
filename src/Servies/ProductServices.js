@@ -43,14 +43,9 @@ const SliderListService= async ()=>{
 }
 
 
-
-
-
-
-
 const ListByBrandService= async (req)=>{
   try{
-    let brandID=new ObjectId(req.params.brandID)
+    let brandID= new ObjectId(req.params.brandID)
     let JoinStage1={$lookup: {from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
     let JoinStage2={$lookup: {from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
     let matchStage= {$match: {brandID:brandID}}

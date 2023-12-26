@@ -49,7 +49,7 @@ const SaveWishlistService = async (req)=>{
 
     try{
         let user_id = req.headers.user_id;
-        console.log(user_id)
+        //console.log(user_id)
         let reqbody = req.body;
         reqbody.userID = user_id;
 

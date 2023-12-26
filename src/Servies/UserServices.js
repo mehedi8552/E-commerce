@@ -48,6 +48,7 @@ const VarifyOTPService = async (req)=>{
     }
     
 }
+//update and create
 const SaveProfileService = async (req)=>{
    try{
     let user_id = req.headers.user_id;
@@ -62,6 +63,7 @@ const SaveProfileService = async (req)=>{
     }
 
 }
+//Read
 const ReadProfileService = async (req)=>{
     let user_id = req.headers.user_id;
   let result =   await ProfileModel.find({userID:user_id})

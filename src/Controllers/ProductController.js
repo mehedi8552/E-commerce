@@ -27,12 +27,6 @@ exports.ProducSliderList = async (req,res)=>{
     return res.status(200).json(result);
 }
 
-
-
-
-
-
-
 exports.ProducListByBrand = async (req,res)=>{
     let result = await ListByBrandService(req);
     return res.status(200).json(result);
