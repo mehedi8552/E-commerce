@@ -43,6 +43,7 @@ router.post('/SaveWishlist',AuthVerification,WishListController.SaveWishlist);
 
 //Cardlist Controller......
 router.post('/SaveCartList',AuthVerification,CardController.SaveCartListContriller)
+router.post('/UpdateCartList/:CartdID',AuthVerification,CardController.UpdateCartListContriller)
 router.post('/RemoveCartList',AuthVerification,CardController.RemoveCartListContriller)
 router.get('/CartList',AuthVerification,CardController.CartListContriller)
 

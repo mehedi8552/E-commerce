@@ -145,9 +145,6 @@ catch (e) {
 }
 }
 
-
-
-
 const ListByKeywordService= async (req)=>{
   try{
   let SearchRegex ={"$regex": req.params.keyword, "$options": "i"}
@@ -208,8 +205,6 @@ const ReviewListService = async (req)=>{
     return {status:"fail", data:e.toString()}
   }
 }
-
-
 
 module.exports = {
     CategoryListService,

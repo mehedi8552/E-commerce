@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const DataScema = mongoose.Schema({
     title:{type:String,require:true},
     shortDes:{type:String,require:true},
-    price:{type:String,require:true},
+    price:{type:Number,require:true},
     discount:{type:String,require:true},
     discountPrice:{type:String,require:true},
     image:{type:String,require:true},
