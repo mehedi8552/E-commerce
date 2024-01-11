@@ -1,0 +1,62 @@
+[
+  {
+    "product": "Widget A",
+    "quantity": 10,
+    "price": 15,
+    "date": ISODate("2023-09-01T12:00:00Z")
+  },
+  {
+    "product": "Gizmo X",
+    "quantity": 8,
+    "price": 20,
+    "date": ISODate("2023-09-02T10:30:00Z")
+  },
+  {
+    "product": "Thingamajig Y",
+    "quantity": 15,
+    "price": 12,
+    "date": ISODate("2023-09-03T15:45:00Z")
+  },
+  {
+    "product": "Doodad Z",
+    "quantity": 12,
+    "price": 18,
+    "date": ISODate("2023-09-04T08:15:00Z")
+  },
+  {
+    "product": "Widget B",
+    "quantity": 7,
+    "price": 25,
+    "date": ISODate("2023-09-05T14:20:00Z")
+  },
+  {
+    "product": "Gadget Q",
+    "quantity": 20,
+    "price": 8,
+    "date": ISODate("2023-09-06T09:45:00Z")
+  },
+  {
+    "product": "Thingamajig X",
+    "quantity": 18,
+    "price": 22,
+    "date": ISODate("2023-09-07T11:30:00Z")
+  },
+  {
+    "product": "Doodad A",
+    "quantity": 14,
+    "price": 16,
+    "date": ISODate("2023-09-08T16:00:00Z")
+  },
+  {
+    "product": "Widget C",
+    "quantity": 9,
+    "price": 30,
+    "date": ISODate("2023-09-09T13:15:00Z")
+  },
+  {
+    "product": "Gizmo Z",
+    "quantity": 6,
+    "price": 14,
+    "date": ISODate("2023-09-10T07:45:00Z")
+  }
+]

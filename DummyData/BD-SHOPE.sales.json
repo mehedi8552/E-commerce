@@ -1,0 +1,103 @@
+[{
+  "_id": {
+    "$oid": "659cc64c4e90c168890e81f1"
+  },
+  "product": "Widget A",
+  "quantity": 10,
+  "price": 15,
+  "date": "2024-01-09"
+},
+{
+  "_id": {
+    "$oid": "659cc64c4e90c168890e81f2"
+  },
+  "product": "Gizmo X",
+  "quantity": 8,
+  "price": 20,
+  "date": "2024-01-09"
+},
+{
+  "_id": {
+    "$oid": "659cc64c4e90c168890e81f3"
+  },
+  "product": "Thingamajig Y",
+  "quantity": 15,
+  "price": 12,
+  "date": "2023-09-03T15:45:00Z"
+},
+{
+  "_id": {
+    "$oid": "659cc64c4e90c168890e81f4"
+  },
+  "product": "Doodad Z",
+  "quantity": 12,
+  "price": 18,
+  "date": "2024-01-09"
+},
+{
+  "_id": {
+    "$oid": "659cc64c4e90c168890e81f5"
+  },
+  "product": "Widget B",
+  "quantity": 7,
+  "price": 25,
+  "date": "2024-01-09"
+},
+{
+  "_id": {
+    "$oid": "659cc64c4e90c168890e81f6"
+  },
+  "product": "Gadget Q",
+  "quantity": 20,
+  "price": 8,
+  "date": "  {  \"year\": 2024,\n    \"month\": 1,\n    \"day\": 9}"
+},
+{
+  "_id": {
+    "$oid": "659cc64c4e90c168890e81f7"
+  },
+  "product": "Thingamajig X",
+  "quantity": 18,
+  "price": 22,
+  "date": "2023-10-07T11:30:00Z"
+},
+{
+  "_id": {
+    "$oid": "659cc64c4e90c168890e81f8"
+  },
+  "product": "Doodad A",
+  "quantity": 14,
+  "price": 16,
+  "date": "2023-10-08T16:00:00Z"
+},
+{
+  "_id": {
+    "$oid": "659cc64c4e90c168890e81f9"
+  },
+  "product": "Widget C",
+  "quantity": 9,
+  "price": 30,
+  "date": "2023-10-09T13:15:00Z"
+},
+{
+  "_id": {
+    "$oid": "659cc64c4e90c168890e81fa"
+  },
+  "product": "Gizmo Z",
+  "quantity": 6,
+  "price": 14,
+  "date": "2023-10-10T07:45:00Z"
+},
+{
+  "_id": {
+    "$oid": "659d4539f58e459c08848d01"
+  },
+  "product": "Gadget Q",
+  "quantity": 20,
+  "price": 8,
+  "date": {
+    "year": 2024,
+    "month": 1,
+    "day": 9
+  }
+}]

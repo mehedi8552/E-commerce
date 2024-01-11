@@ -7,7 +7,7 @@ module.exports = (req,res,next)=>{
     let token = req.cookies.token;
     //console.log(token);
 
-    let decoded = DecodeTocken(token)
+    let decoded = DecodeTocken(token);
 
     if(decoded===null){
         return res.status(401).json({status:"failed",message:"Unauthorized"})
