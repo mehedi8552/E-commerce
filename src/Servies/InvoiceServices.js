@@ -9,6 +9,7 @@ const PaymentSettingModel = require("../models/PaymentSettingModel");
 const ObjectID = mongoose.Types.ObjectId;
 const FormData = require('form-data');
 const axios = require('axios');
+const invoiceproductsModel = require('../models/InvoiceProductModel');
 
 
 const CreateInvoiceService = async (req)=>{
@@ -108,7 +109,6 @@ const PaymentFailService = async (req)=>{
     }
     }
 
-
 const PaymentCancelService = async (req)=>{
         try{
             
@@ -117,8 +117,6 @@ const PaymentCancelService = async (req)=>{
         
         }
         }
-
-
 
  const PaymentIPNService = async (req)=>{
     try{
@@ -137,23 +135,43 @@ const PaymentSuccessService = async (req)=>{
                 
         }
  }
-
+//done
  const InvoiceListService = async (req)=>{
     try{
-                    
-                }
-    catch(e){
-                
-        }
- }
 
+        let user_id = req.headers.user_id;
+
+        let invoice = await InvoiceModel.find({userID:user_id})
+
+        return {status:'success',message:invoice}
+    
+    }
+    catch(e){
+        return {status:'Failed',message:e.toString()}
+    }
+}
+//done
  const InvoiceProductService = async (req)=>{
     try{
+      let user_id = new ObjectID(req.headers.user_id);
+      let invoice_id = new ObjectID(req.params.invoice_id);
+
+      let matchStage = {$match:{userID:user_id,invoiceID:invoice_id}};
+      let joinWithProduct = {$lookup:{from:"products",localField:"productID",foreignField:"_id" ,as:"product"}}
+      let unwindStage = {$unwind:"$product"}
+           
+      let invoproductlist = await invoiceproductsModel.aggregate([
+        matchStage,
+        joinWithProduct,
+        unwindStage
+      ])
+       
+      return {status:"success",data:invoproductlist}
                     
-                }
+    }
     catch(e){
-                
-        }
+        return {status:'Failed',message:e.toString()}           
+    }
  }
 
 

@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const ProductSliderModel = require("../models/ProductSliderModel");
 const ProductDetailModel = require("../models/Productdetails");
 const ReviewModel = require("../models/ReviewModel");
-const FeaturesModel = require("../models/FeaturesModel");
 
 
 const ObjectId = mongoose.Types.ObjectId;
@@ -206,6 +205,23 @@ const ReviewListService = async (req)=>{
   }
 }
 
+const CreateReviewService = async (req)=>{
+  try{
+    let user_id = req.headers.user_id;
+    let reqbody = req.body;
+
+   let data = await ReviewModel.create({
+      productID:reqbody['productID'],
+      userID:user_id,
+      des:reqbody['des'],
+      rating:reqbody['rating'],
+    })
+    return {status:"success", data:data}
+  }
+  catch(e){
+    return {status:"fail", data:e.toString()}
+  }
+}
 module.exports = {
     CategoryListService,
     SliderListService,
@@ -216,7 +232,8 @@ module.exports = {
     ListByRemarkService,
     ReviewListService,
     DetailsService,
-    BrandListService
+    BrandListService,
+    CreateReviewService
 }
 
 
