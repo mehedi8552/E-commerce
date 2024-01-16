@@ -14,28 +14,26 @@ const invoiceproductsModel = require('../models/InvoiceProductModel');
 
 const CreateInvoiceService = async (req)=>{
 try{
-    // =============Step 01: Calculate Total Payable & Vat=====================================================================================
+    //Step 01: Calculate Total Payable & Vat......
         let user_id = new ObjectID(req.headers.user_id);
-        let email =  req.headers.email;
+        let cus_email =  req.headers.email;
 
         matchStage={$match:{userID:user_id}};
-
         joinWithProduct = {$lookup:{from:'products',localField:'productID',foreignField:'_id', as:'product'}}
         unwindStage = {$unwind:"$product"};
-
-        let CartProducts=await CartModel.aggregate([matchStage,joinWithProduct,unwindStage])
-
+        let CartProducts = await CartModel.aggregate([matchStage,joinWithProduct,unwindStage])
+        let productIDs = CartProducts.map(product => product.productID);
        // console.log(CartProducts)
         let total_amount =0;
         CartProducts.forEach((element)=>{
-            let Price;
-                if(element['product']['discount']== true){
-                     Price = element['product']['discountPrice']
+            let price;
+                if(element['product']['discount']){
+                    price=parseFloat(element['product']['discountPrice'])
                 }
                 else{
-                     Price = element['product']['price']
+                    price=parseFloat(element['product']['price'])
                 }
-               total_amount += parseFloat(element['qty']*Price) ;
+               total_amount += parseFloat(element['qty']*price) ;
         }
          
         )
@@ -45,9 +43,9 @@ try{
 
 
         //Customer details and shiping details............
-        let profile = await ProfileModel.aggregate([matchStage])
-        let userDetails =`Name:${profile[0]['cus_name']},Phone:${profile[0]['cus_phone']},Email:${email}`;
-        let ShipDetails =`Name:${profile[0]['ship_name']},Phone:${profile[0]['ship_phone']},Address:${profile[0]['ship_add']}`
+        let Profile = await ProfileModel.aggregate([matchStage])
+        let userDetails =`Name:${Profile[0]['cus_name']},Phone:${Profile[0]['cus_phone']}`;
+        let ShipDetails =`Name:${Profile[0]['ship_name']},Phone:${Profile[0]['ship_phone']},Address:${Profile[0]['ship_add']}`
         //console.log(userDetails);
 
         //Transection and other ID.....
@@ -75,7 +73,7 @@ try{
 
         //Create invoice Product 
 
-        let invoiceID = createInvoice['id'];
+        let invoiceID = createInvoice['_id'];
 
        CartProducts.forEach(async(element)=>{
            await InvoiceProductModel.create({
@@ -90,9 +88,55 @@ try{
 
         });
             // Remove cart list
-            await CartModel.deleteMany({userID:user_id});
+            await CartModel.deleteMany({ productID: { $in: productIDs } });
 
-        return {status:'success',message:invoiceID}
+
+            //Create SSL payment;
+
+            let  PaymentSetting= await PaymentSettingModel.find();
+
+            const form = new FormData();
+
+            //SSL data section 
+            form.append('store_id', PaymentSetting[0]['store_id']);
+            form.append('store_passwd', PaymentSetting[0]['store_passwd']);
+            form.append('total_amount', Payable.toString());
+            form.append('currency', PaymentSetting[0]['currency']);
+            form.append('tran_id', tran_id);
+            form.append('success_url', `${PaymentSetting[0]['success_url']}/${tran_id}`);
+            form.append('fail_url', `${PaymentSetting[0]['fail_url']}/${tran_id}`);
+            form.append('cancel_url', `${PaymentSetting[0]['cancel_url']}/${tran_id}`);
+            form.append('ipn_url', `${PaymentSetting[0]['ipn_url']}/${tran_id}`);
+    
+            form.append('cus_name', Profile[0].cus_name);
+            form.append('cus_email',cus_email);
+            form.append('cus_add1', Profile[0].cus_add);
+            form.append('cus_add2', Profile[0].cus_add);
+            form.append('cus_city', Profile[0].cus_city);
+            form.append('cus_state', Profile[0].cus_state);
+            form.append('cus_postcode', Profile[0].cus_postcode);
+            form.append('cus_country', Profile[0].cus_country);
+            form.append('cus_phone', Profile[0].cus_phone);
+            form.append('cus_fax', Profile[0].cus_phone);
+    
+            form.append('shipping_method', 'YES');
+            form.append('ship_name', Profile[0].ship_name);
+            form.append('ship_add1', Profile[0].ship_add);
+            form.append('ship_add2', Profile[0].ship_add);
+            form.append('ship_city', Profile[0].ship_city);
+            form.append('ship_state', Profile[0].ship_state);
+            form.append('ship_country', Profile[0].ship_country);
+            form.append('ship_postcode', Profile[0].ship_postcode);
+            form.append('product_name', 'product_name');
+            form.append('product_category', 'category');
+            form.append('product_profile', 'profile');
+            form.append('product_amount', '3');
+
+            let reqssl = await axios.post(PaymentSetting[0]["init_url"],form)
+
+            //console.log(reqssl)
+
+        return {status:'success',message:reqssl.data}
     
 }
 catch(e){
@@ -102,38 +146,53 @@ catch(e){
 
 const PaymentFailService = async (req)=>{
     try{
+
+        trxID = req.params.trxID;
+        await InvoiceModel.updateOne({tran_id:trxID},{payment_status:"Fail"});
+        return {status:"PaymentFail"}
         
     }
     catch(e){
-    
+        return {status:"fail", message:e.toString()}
     }
     }
 
 const PaymentCancelService = async (req)=>{
         try{
+            trxID = req.params.trxID;
+            await InvoiceModel.updateOne({tran_id:trxID},{payment_status:"Cancel"});
+            return {status:"Payment Cancel"}
             
         }
         catch(e){
-        
+            return {status:"fail", message:e.toString()}
         }
         }
 
  const PaymentIPNService = async (req)=>{
     try{
-                
-            }
+        trxID = req.params.trxID;
+        await InvoiceModel.updateOne({tran_id:trxID},{payment_status:"IPN"});
+        return {status:"Payment IPN"}
+        
+    }
     catch(e){
-            
-            }
+        return {status:"fail", message:e.toString()}
+    }
     }
 
 const PaymentSuccessService = async (req)=>{
     try{
-                    
-                }
+        trxID = req.params.trxID;
+        await InvoiceModel.updateOne({tran_id:trxID},{payment_status:"success"});
+
+        return{status:"Payment Success"}
+
+        
+    }
     catch(e){
-                
-        }
+        return {status:"fail", message:e.toString()}
+    }
  }
 //done
  const InvoiceListService = async (req)=>{
