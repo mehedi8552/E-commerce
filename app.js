@@ -49,7 +49,9 @@ res.send("Hello this is Create page");
 })
 
 
-app.use("/api/v1",router)
+app.use("/api/v1",router);
+
+app.use(express.static('client/dist'))
 
 
 // Add React Front End Routing
