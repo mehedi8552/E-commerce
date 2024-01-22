@@ -1,6 +1,6 @@
 const CategoryModel = require("../models/CategoryModel");
 const BrandModel = require("../models/BrandModel");
-const ProductModel = require("../models/ProductModel");
+const ProductModel = require("../Models/ProductModel");
 const mongoose = require("mongoose");
 
 const ProductSliderModel = require("../models/ProductSliderModel");
@@ -77,6 +77,8 @@ catch (e) {
 }
 const ListByRemarkService= async (req)=>{
   try{
+
+    
     let remark= req.params.remark
     let JoinStage1={$lookup: {from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
     let JoinStage2={$lookup: {from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
@@ -237,3 +239,7 @@ module.exports = {
 }
 
 
+// File name 'e:/Mern Paid Course/module-17/E-commarce project/src/models/ProductModel.js' differs from already included file name 'e:/Mern Paid Course/module-17/E-commarce project/src/Models/ProductModel.js' only in casing.
+//   The file is in the program because:
+//     Root file specified for compilation
+//     Imported via "../models/ProductModel" from file 'e:/Mern Paid Course/module-17/E-commarce project/src/Servies/ProductServices.js'
