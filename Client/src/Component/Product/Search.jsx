@@ -1,7 +1,7 @@
-
+import StarRatings from "react-star-ratings";
 import ProductStore from '../../store/ProductStore';
 import Product_skeleton from '../../skeleton/Product_skeleton';
-
+import {Link} from "react-router-dom";
 
 const Search = () => {
     //const {ProductList} = ProductStore();
@@ -61,7 +61,7 @@ const Search = () => {
                         );
                       }
                       return (
-                        <div className="col-md-3 p-2 col-lg-3 col-sm-6 col-12">
+                        <div key={i} className="col-md-3 p-2 col-lg-3 col-sm-6 col-12">
                           <Link
                             to={`/details/${item["_id"]}`}
                             className="card shadow-sm h-100 rounded-3 bg-white"

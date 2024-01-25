@@ -71,9 +71,11 @@ const  ProductStore = create ((set)=>({
     },
     
     Searchkeyword:"",
-    setSearchKeyword:async (keyword)=>{
+    setSearchKeyword:async(keyword)=>{
         set({Searchkeyword:keyword});
     }
+    
+    
 }))
 
 export default ProductStore;

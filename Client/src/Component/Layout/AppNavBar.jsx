@@ -5,7 +5,7 @@ import logo from "../../assets/images/logo.png";
 import ProductStore from "../../store/ProductStore";
 
 const AppNavBar = () => {
-  const {setSearchKeyword,Searchkeyword } = ProductStore;
+  const {setSearchKeyword,Searchkeyword } = ProductStore();
   return (
     <>
       <div className="container-fluid text-white p-2 bg-success">
@@ -67,9 +67,8 @@ const AppNavBar = () => {
             <div className="input-group">
               <input
                 value={Searchkeyword}
-                onChange={(e) => 
-                setSearchKeyword(e.target.value)
-                }
+                onChange={(e)=>setSearchKeyword(e.target.value)
+                } 
                 className="form-control"
                 type="search"
                 placeholder="Search"

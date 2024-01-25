@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import ProductStore from '../store/ProductStore';
 
 const ListByKeyword = () => {
-const {KeywordListRequest}= ProductStore
+const {KeywordListRequest}= ProductStore();
 const {keyword} = useParams()
     useEffect(()=>{
         (async()=>{
