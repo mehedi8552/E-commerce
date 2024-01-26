@@ -75,8 +75,8 @@ const AppNavBar = () => {
                 aria-label="Search"
               />
               <Link
-                to={
-                  `/ProducListByKeyword/${Searchkeyword}`
+                to={ Searchkeyword.length>0?
+                  `/ProducListByKeyword/${Searchkeyword}`:"/"
                 }
                 className="btn btn-outline-dark"
                 type="submit"

@@ -23,10 +23,11 @@ const  ProductStore = create ((set)=>({
     },
 
     
+    
    // ...........
     SliderList:null,
     SliderRequest:async()=>{
-        let res=await axios.get('/api/v1/ProducSliderList');
+        let res=await axios.get(`/api/v1/ProducSliderList`);
         if(res.data['status']==="success"){
             set({SliderList:res.data['data']})
         }
