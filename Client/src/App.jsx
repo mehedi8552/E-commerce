@@ -5,6 +5,7 @@ import 'react-bootstrap-icons';
 import ListByBrand from './Pages/ListByBrand';
 import ListByCategory from './Pages/ListByCategory';
 import ListByKeyword from './Pages/ListByKeyword';
+import DetailsPage from './Pages/DetailsPage'
 const App = () => {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ const App = () => {
       <Route path="/ProducListByBrand/:id" element ={<ListByBrand/>}></Route>
       <Route path="/ProducListByCategory/:id" element ={<ListByCategory/>}></Route>//
       <Route path="/ProducListByKeyword/:keyword" element ={<ListByKeyword/>}></Route>
+      <Route path="/ProductDetails/:id" element ={<DetailsPage/>}></Route>
     </Routes>
     </BrowserRouter>
   );

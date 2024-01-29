@@ -23,7 +23,10 @@ router.get('/ProducListBySimiler/:categoryID',ProductController.ProducListBySimi
 router.get('/ProducListByKeyword/:keyword',ProductController.ProducListByKeyword)
 
 router.get('/ProductDetails/:productID',ProductController.ProductDetails)
-router.get('/ProductReviewList/:productID',ProductController.ProductReviewList)
+router.get('/ProductReviewList/:productID',ProductController.ProductReviewList);
+
+//filter min & max and category & brand......
+router.post('/ProductListByFilter',ProductController.ListByFilte)
 
 //UserController Api section.....
 

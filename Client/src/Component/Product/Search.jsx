@@ -6,33 +6,37 @@ import StarRatings from "react-star-ratings";
 
 const Search = () => {
   const { ListProduct,BrandList,BrandRequest,CategoryList,CategoryRequest,FilterListRequest} = ProductStore();
+ 
   const [Filter,SetFilter] = useState(
-    {
-    brandID:"",
-    categoryID:"",
-    priceMax:"",
-    priceMin:""
-  }
-  )
+     {
+     brandID:"",
+     categoryID:"",
+     priceMax:"",
+     priceMin:""
+   }
+   )
+ 
+   const OnChange = async (name,value)=>{
+     SetFilter((data)=>({
+       ...data,
+       [name]:value
+     }))
+   }
+   
 
-  const OnChange = async (name,value)=>{
-    SetFilter((data)=>({
-      ...data,
-      [name]:value
-    }))
-  }
-  
+  useEffect(()=>{
+   (async()=>{
+     BrandList === null? await BrandRequest():null;
+     CategoryList === null? await  CategoryRequest():null;
 
- useEffect(()=>{
-  (async()=>{
-    BrandList === null? await BrandRequest():null;
-    CategoryList === null? await  CategoryRequest():null;
-
-    let allempty = Object.values(Filter).every(value => value ==="");
-    !allempty?await FilterListRequest(Filter):null;
-  })()
- },[Filter])
-return (
+     let allempty = Object.values(Filter).every(value => value ==="");
+     !allempty?await FilterListRequest(Filter):null;
+   })()
+  },[Filter])
+ // console.log(ListProduct);
+ //const data = ProductStore.getState().ListProduct;
+ //console.log(data)
+ return (
   <div className="container mt-2">
     <div className="row">
       <div className="col-md-3 p-2">

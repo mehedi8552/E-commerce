@@ -82,8 +82,25 @@ const  ProductStore = create ((set)=>({
     Searchkeyword:"",
     setSearchKeyword:async(keyword)=>{
         set({Searchkeyword:keyword});
-    }
-    
+    },
+
+    Details:null,
+    ProductDetailsRequest:async(id)=>{
+        let res=await axios.get(`/api/v1/ProductDetails/${id}`);
+        //console.log(res)
+        if(res.data['status']==="success"){
+            set({Details:res.data['data']})
+        }
+    },
+    ReviewList:null,
+    ProductReviewListRequest:async(id)=>{
+        let res = await axios.get(`/api/v1/ProductReviewList/${id}`);
+        
+        if(res.data['status']=== "success"){
+           set({ReviewList:res.data['data']})
+           
+        }
+    },
     
 }))
 
