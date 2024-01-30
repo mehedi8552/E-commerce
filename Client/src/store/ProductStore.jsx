@@ -95,10 +95,9 @@ const  ProductStore = create ((set)=>({
     ReviewList:null,
     ProductReviewListRequest:async(id)=>{
         let res = await axios.get(`/api/v1/ProductReviewList/${id}`);
-        
+        //console.log(res.data['data']);
         if(res.data['status']=== "success"){
-           set({ReviewList:res.data['data']})
-           
+            set({ReviewList:res.data['data']})
         }
     },
     

@@ -44,22 +44,24 @@ const ListByProduct = () => {
             <select value={Filter.brandID} onChange={async(e)=> await OnChange('brandID',e.target.value)} className="form-control form-select">
               <option value=''>Choose Brand</option>
               {
+                BrandList ===null?(
                 BrandList.map((item,i)=>{
                   return(
                     <option value={item['_id']}>{item['brandName']}</option>
                   )
-                })
+                })):(<option></option>)
               }
             </select>
             <label className="form-label mt-3">Categories</label>
             <select value={Filter.categoryID} onChange={async(e)=>await OnChange("categoryID",e.target.value)} className="form-control form-select">
               <option >Choose Category</option>
               {
+                CategoryList===null?(
                 CategoryList.map((item,i)=>{
                   return(
                     <option value={item['_id']}>{item['categoryName']}</option>
                   )
-                })
+                })):(<option></option>)
               }
             </select>
             <label className="form-label mt-3">Maximum Price ${Filter.priceMax}</label>
