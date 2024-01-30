@@ -100,6 +100,14 @@ const  ProductStore = create ((set)=>({
             set({ReviewList:res.data['data']})
         }
     },
+
+    legal:null,
+    legalRequest:async(type)=>{
+        let res = await axios.get(`/api/v1/LegalsControl/${type}`);
+        if(res.data['status']=== "success"){
+            set({legal:res.data['data']})
+        }
+    },
     
 }))
 

@@ -6,6 +6,7 @@ import ListByBrand from './Pages/ListByBrand';
 import ListByCategory from './Pages/ListByCategory';
 import ListByKeyword from './Pages/ListByKeyword';
 import DetailsPage from './Pages/DetailsPage'
+import LegalMain from './Pages/Legal/legalMain'
 const App = () => {
   return (
     <BrowserRouter>
@@ -15,6 +16,8 @@ const App = () => {
       <Route path="/ProducListByCategory/:id" element ={<ListByCategory/>}></Route>//
       <Route path="/ProducListByKeyword/:keyword" element ={<ListByKeyword/>}></Route>
       <Route path="/ProductDetails/:id" element ={<DetailsPage/>}></Route>
+      
+      <Route path="/LegalsControl/:type" element ={<LegalMain/>}></Route>
     </Routes>
     </BrowserRouter>
   );
