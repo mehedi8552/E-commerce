@@ -60,6 +60,7 @@ router.get('/InvoiceProductList/:invoice_id',AuthVerification,InvoiceController.
 
 // FeatureList.....
 router.get('/FeatureList',FeatureController.FeatureListController);
+router.get('/LegalsControl/:type',FeatureController.LegalsController);
 
 
 //Rivew section....

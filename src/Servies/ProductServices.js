@@ -4,7 +4,6 @@ const ProductModel = require("../Models/ProductModel");
 const mongoose = require("mongoose");
 
 const ProductSliderModel = require("../models/ProductSliderModel");
-const ProductDetailModel = require("../models/Productdetails");
 const ReviewModel = require("../models/ReviewModel");
 
 
@@ -248,7 +247,8 @@ const ReviewListService = async (req)=>{
      "profile.cus_name":1,
      "des":1,
      "profile.cus_phone":1,
-     "_id":0
+     "_id":0,
+     "rating":1,
    }
   }
 
