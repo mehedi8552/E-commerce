@@ -6,7 +6,10 @@ import ListByBrand from './Pages/ListByBrand';
 import ListByCategory from './Pages/ListByCategory';
 import ListByKeyword from './Pages/ListByKeyword';
 import DetailsPage from './Pages/DetailsPage'
-import LegalMain from './Pages/Legal/legalMain'
+import LegalMain from './Pages/legalMain'
+import Login from './Pages/Login';
+import Varify from './Pages/Varify';
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -18,6 +21,9 @@ const App = () => {
       <Route path="/ProductDetails/:id" element ={<DetailsPage/>}></Route>
       
       <Route path="/LegalsControl/:type" element ={<LegalMain/>}></Route>
+
+      <Route path="/login" element ={<Login/>}></Route>
+      <Route path="/otp" element ={<Varify/>}></Route>
     </Routes>
     </BrowserRouter>
   );

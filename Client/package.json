@@ -37,6 +37,8 @@
     "react-window": "^1.8.10",
     "read-excel-file": "^5.7.1",
     "recharts": "^2.10.1",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.10.4",
     "web-vitals": "^2.1.4",
     "zustand": "^4.4.3"
   },
