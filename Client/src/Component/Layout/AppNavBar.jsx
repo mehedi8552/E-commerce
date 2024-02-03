@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 
 import logo from "../../assets/images/logo.png";
 import ProductStore from "../../store/ProductStore";
+import UserStore from "../../store/UserStore";
 
 const AppNavBar = () => {
   const {setSearchKeyword,Searchkeyword } = ProductStore();
+  const {islogin,LogOutRequest} =  UserStore();
   return (
     <>
       <div className="container-fluid text-white p-2 bg-success">
@@ -98,20 +100,35 @@ const AppNavBar = () => {
             >
               <i className="bi text-dark bi-heart"></i>
             </Link>
-            <Link
-              type="button"
-              className="btn ms-3 btn-success d-flex"
-              to="/profile"
-            >
-              Profile
-            </Link>
-            <Link
-              type="button"
-              className="btn ms-3 btn-success d-flex"
-              to="/profile"
-            >
-              Logout
-            </Link>
+            {
+              islogin()?(
+                <>
+                <Link
+                type="button"
+                className="btn ms-3 btn-success d-flex"
+                to="/profile"
+              >
+                Profile
+              </Link>
+                <Link
+                onClick={LogOutRequest}
+                type="button"
+                className="btn ms-3 btn-success d-flex"
+                to="/"
+              >
+                Logout
+              </Link>
+                </>
+                ):(
+                 <Link
+                 type="button"
+                 className="btn ms-3 btn-success d-flex"
+                 to="/login"
+               >
+                 Login
+               </Link>
+              )
+            }
           </div>
         </div>
       </nav>

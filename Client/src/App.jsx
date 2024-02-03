@@ -9,6 +9,7 @@ import DetailsPage from './Pages/DetailsPage'
 import LegalMain from './Pages/legalMain'
 import Login from './Pages/Login';
 import Varify from './Pages/Varify';
+import ProfilePage from './Pages/ProfilePage';
 
 const App = () => {
   return (
@@ -24,6 +25,8 @@ const App = () => {
 
       <Route path="/login" element ={<Login/>}></Route>
       <Route path="/otp" element ={<Varify/>}></Route>
+
+      <Route path="/profile" element ={<ProfilePage/>}></Route>
     </Routes>
     </BrowserRouter>
   );
