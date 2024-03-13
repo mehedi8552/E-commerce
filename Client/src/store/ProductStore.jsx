@@ -17,6 +17,7 @@ const  ProductStore = create ((set)=>({
     CategoryList: null,
     CategoryRequest : async ()=>{
         let res = await  axios.get('/api/v1/ProducCategoryList');
+        
         if(res.data['status'] === "success"){
             set({CategoryList:res.data['data']})
         }
@@ -46,7 +47,6 @@ const  ProductStore = create ((set)=>({
     BrandListRequest: async (brandID) => {
         set({ ListProduct: null });
         let res = await axios.get(`/api/v1/ProducListByBrand/${brandID}`);
-        //console.log(res.data.data);
         if (res.data['status'] === "success") {
             set({ ListProduct: res.data['data'] });
             
@@ -92,6 +92,7 @@ const  ProductStore = create ((set)=>({
             set({Details:res.data['data']})
         }
     },
+    
     ReviewList:null,
     ProductReviewListRequest:async(id)=>{
         let res = await axios.get(`/api/v1/ProductReviewList/${id}`);

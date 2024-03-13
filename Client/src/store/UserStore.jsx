@@ -3,6 +3,8 @@ import axios from "axios";
 import { getEmail, setEmail, unauthorized } from "../utility/utility";
 import Cookies from "js-cookie";
 const UserStore = create((set) => ({
+  
+  
   islogin: () => {
     return !!Cookies.get("token");
   },
@@ -83,7 +85,7 @@ const UserStore = create((set) => ({
   ProfileDetailsRequest:async()=>{
     try{
        let res = await axios.get(`/api/v1/ReadProfile`);
-        console.log(res.data)
+       
         if(res.data['data'].length > 0){
             set({ProfileDetails:res.data['data'][0]})
             set({ProfileFrom:res.data['data'][0]})

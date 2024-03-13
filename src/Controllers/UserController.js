@@ -9,7 +9,7 @@ const {
 
 exports.UserOTP = async (req,res)=>{
     let result = await UserOTPService(req);
-   res.status(200).json(result);
+    res.status(200).json(result);
 }
 exports.VarifyOTP = async (req,res)=>{
     let result = await VarifyOTPService(req);

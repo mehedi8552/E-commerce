@@ -5,7 +5,7 @@ const AuthVerification = require('../Middlewares/AuthVerification.js');
 const WishListController = require('../Controllers/WishListController');
 const CardController = require('../Controllers/CardListController.js');
 const InvoiceController = require('../Controllers/InvoiceController.js');
-const FeatureController = require("../Controllers/FeaturesController.js")
+const FeatureController = require("../Controllers/FeaturesController.js");
 
 const router = express.Router();
 
@@ -29,15 +29,15 @@ router.get('/ProductReviewList/:productID',ProductController.ProductReviewList);
 router.post('/ProductListByFilter',ProductController.ListByFilte)
 
 //UserController Api section.....
-
 router.get('/UserOTP/:email',UserController.UserOTP);
 router.get('/VarifyOTP/:email/:otp',UserController.VarifyOTP);
 router.get('/UserLogOut',AuthVerification,UserController.UserLogOut);
 
 
+
 router.post('/CreateProfile',AuthVerification,UserController.CreateProfile);
 router.post('/UpdateProfile',AuthVerification,UserController.UpdateProfile);
-router.post('/ReadProfile',AuthVerification,UserController.ReadProfile);
+router.get('/ReadProfile',AuthVerification,UserController.ReadProfile);
 
 
 //Wishlist controller.....

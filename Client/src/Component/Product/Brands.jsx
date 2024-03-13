@@ -30,7 +30,7 @@ const Brand = () => {
                     className="card h-100 rounded-3 bg-light"
                   >
                     <div className="card-body">
-                      <img alt="" className="w-75" src={item["brandImg"]} />
+                      <img alt="" className="w-75" src={item["brandImg"]}/>
                       <p className="bodySmal mt-3">{item["brandName"]}</p>
                     </div>
                   </Link>

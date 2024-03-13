@@ -15,13 +15,10 @@ let {ProfileFrom,ProfileDetails,ProfileFromChange,ProfileDetailsRequest,ProfileS
     const Save = async () => {
       let res= await ProfileSaveRequest(ProfileFrom);
       if(res){
-          toast.success("Profile Updated")
+          toast.success("Profile Updated");
           await ProfileDetailsRequest();
       }
-
     }
-    
-
     if(ProfileDetails===null){
        return( 
        <Profile_skeleton/>

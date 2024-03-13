@@ -40,10 +40,10 @@ const SliderListService= async ()=>{
   }
 }
 
-
 const ListByBrandService= async (req)=>{
   try{
     let brandID= new ObjectId(req.params.brandID)
+    console.log(brandID);
     let JoinStage1={$lookup: {from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
     let JoinStage2={$lookup: {from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
     let matchStage= {$match: {brandID:brandID}}
@@ -81,12 +81,12 @@ const ListByRemarkService= async (req)=>{
     let remark= req.params.remark
     let JoinStage1={$lookup: {from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
     let JoinStage2={$lookup: {from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
-    let matchStage= {$match: {remark:remark}}
-    let projectionStage= {$project: {'category._id': 0, 'brand._id': 0, 'categoryID':0, 'brandID':0}}
-    let unwindCategoryStage={$unwind: "$category"}
-    let unwindBrandStage={$unwind: "$brand"}
-    let data=await ProductModel.aggregate([matchStage, JoinStage1, JoinStage2, unwindCategoryStage, unwindBrandStage, projectionStage,])
-    return {status:"success", data:data}
+    let matchStage= {$match: {remark:remark}};
+    let projectionStage= {$project: {'category._id': 0, 'brand._id': 0, 'categoryID':0, 'brandID':0}};
+    let unwindCategoryStage={$unwind: "$category"};
+    let unwindBrandStage={$unwind: "$brand"};
+    let data=await ProductModel.aggregate([matchStage, JoinStage1, JoinStage2, unwindCategoryStage, unwindBrandStage, projectionStage,]);
+    return {status:"success", data:data};
 }
 catch (e) {
     return {status:"fail", data:e.toString()}
