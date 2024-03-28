@@ -11,7 +11,6 @@ const DataScema = mongoose.Schema({
     stock:{type:String,require:true},
     remark:{type:String,require:true},
     categoryID:{type:mongoose.Schema.Types.ObjectId,require:true},
-
     brandID:{type:mongoose.Schema.Types.ObjectId,require:true}
 },
 {
@@ -19,5 +18,6 @@ const DataScema = mongoose.Schema({
 })
 
 const ProductModel = mongoose.model('products',DataScema);
+
 
 module.exports = ProductModel;

@@ -1,10 +1,9 @@
 const CategoryModel = require("../models/CategoryModel");
 const BrandModel = require("../models/BrandModel");
-const ProductModel = require("../models/ProductModel");
+const ProductModel = require("../Models/ProductModel");
 const mongoose = require("mongoose");
 
 const ProductSliderModel = require("../models/ProductSliderModel");
-const ProductDetailModel = require("../models/Productdetails");
 const ReviewModel = require("../models/ReviewModel");
 
 
@@ -41,10 +40,10 @@ const SliderListService= async ()=>{
   }
 }
 
-
 const ListByBrandService= async (req)=>{
   try{
     let brandID= new ObjectId(req.params.brandID)
+    console.log(brandID);
     let JoinStage1={$lookup: {from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
     let JoinStage2={$lookup: {from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
     let matchStage= {$match: {brandID:brandID}}
@@ -77,20 +76,80 @@ catch (e) {
 }
 const ListByRemarkService= async (req)=>{
   try{
+
+    
     let remark= req.params.remark
     let JoinStage1={$lookup: {from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
     let JoinStage2={$lookup: {from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
-    let matchStage= {$match: {remark:remark}}
-    let projectionStage= {$project: {'category._id': 0, 'brand._id': 0, 'categoryID':0, 'brandID':0}}
-    let unwindCategoryStage={$unwind: "$category"}
-    let unwindBrandStage={$unwind: "$brand"}
-    let data=await ProductModel.aggregate([matchStage, JoinStage1, JoinStage2, unwindCategoryStage, unwindBrandStage, projectionStage,])
-    return {status:"success", data:data}
+    let matchStage= {$match: {remark:remark}};
+    let projectionStage= {$project: {'category._id': 0, 'brand._id': 0, 'categoryID':0, 'brandID':0}};
+    let unwindCategoryStage={$unwind: "$category"};
+    let unwindBrandStage={$unwind: "$brand"};
+    let data=await ProductModel.aggregate([matchStage, JoinStage1, JoinStage2, unwindCategoryStage, unwindBrandStage, projectionStage,]);
+    return {status:"success", data:data};
 }
 catch (e) {
     return {status:"fail", data:e.toString()}
 } 
 }
+
+const ListByFilteServive = async (req)=>{
+
+  try {
+
+    let matchConditions = {};
+    if (req.body['categoryID']) {
+        matchConditions.categoryID = new ObjectId(req.body['categoryID']);
+    }
+    if (req.body['brandID']) {
+        matchConditions.brandID = new ObjectId(req.body['brandID']);
+    }
+    let MatchStage = { $match: matchConditions };
+
+
+
+
+
+
+    let AddFieldsStage = {
+        $addFields: { numericPrice: { $toInt: "$price" }}
+    };
+    let priceMin = parseInt(req.body['priceMin']);
+    let priceMax = parseInt(req.body['priceMax']);
+    let PriceMatchConditions = {};
+    if (!isNaN(priceMin)) {
+        PriceMatchConditions['numericPrice'] = { $gte: priceMin };
+    }
+    if (!isNaN(priceMax)) {
+        PriceMatchConditions['numericPrice'] = { ...(PriceMatchConditions['numericPrice'] || {}), $lte: priceMax };
+    }
+    let PriceMatchStage = { $match: PriceMatchConditions };
+
+
+
+
+
+
+    let JoinWithBrandStage= {$lookup:{from:"brands",localField:"brandID",foreignField:"_id",as:"brand"}};
+    let JoinWithCategoryStage={$lookup:{from:"categories",localField:"categoryID",foreignField:"_id",as:"category"}};
+    let UnwindBrandStage={$unwind:"$brand"}
+    let UnwindCategoryStage={$unwind:"$category"}
+    let ProjectionStage={$project:{'brand._id':0,'category._id':0,'categoryID':0,'brandID':0}}
+
+    let data= await  ProductModel.aggregate([
+        MatchStage,
+        AddFieldsStage,
+        PriceMatchStage,
+        JoinWithBrandStage,JoinWithCategoryStage,
+        UnwindBrandStage,UnwindCategoryStage, ProjectionStage
+    ])
+    return {status:"success",data:data}
+
+}catch (e) {
+    return {status:"fail",data:e}.toString()
+}
+}
+
 
 
 const ListBySimilerService= async (req)=>{
@@ -188,7 +247,8 @@ const ReviewListService = async (req)=>{
      "profile.cus_name":1,
      "des":1,
      "profile.cus_phone":1,
-     "_id":0
+     "_id":0,
+     "rating":1,
    }
   }
 
@@ -233,7 +293,12 @@ module.exports = {
     ReviewListService,
     DetailsService,
     BrandListService,
-    CreateReviewService
+    CreateReviewService,
+    ListByFilteServive
 }
 
 
+// File name 'e:/Mern Paid Course/module-17/E-commarce project/src/models/ProductModel.js' differs from already included file name 'e:/Mern Paid Course/module-17/E-commarce project/src/Models/ProductModel.js' only in casing.
+//   The file is in the program because:
+//     Root file specified for compilation
+//     Imported via "../models/ProductModel" from file 'e:/Mern Paid Course/module-17/E-commarce project/src/Servies/ProductServices.js'

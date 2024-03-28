@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import Home from './Pages/Home';
+import 'react-bootstrap-icons';
+import ListByBrand from './Pages/ListByBrand';
+import ListByCategory from './Pages/ListByCategory';
+import ListByKeyword from './Pages/ListByKeyword';
+import DetailsPage from './Pages/DetailsPage'
+import LegalMain from './Pages/legalMain'
+import Login from './Pages/Login';
+import Varify from './Pages/Varify';
+import ProfilePage from './Pages/ProfilePage';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element ={<Home/>}></Route>
+      <Route path="/ProducListByBrand/:id" element ={<ListByBrand/>}></Route>
+      <Route path="/ProducListByCategory/:id" element ={<ListByCategory/>}></Route>//
+      <Route path="/ProducListByKeyword/:keyword" element ={<ListByKeyword/>}></Route>
+      <Route path="/ProductDetails/:id" element ={<DetailsPage/>}></Route>
+      
+      <Route path="/LegalsControl/:type" element ={<LegalMain/>}></Route>
 
-export default App
+      <Route path="/login" element ={<Login/>}></Route>
+      <Route path="/otp" element ={<Varify/>}></Route>
+
+      <Route path="/profile" element ={<ProfilePage/>}></Route>
+    </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;

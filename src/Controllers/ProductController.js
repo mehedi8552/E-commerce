@@ -10,7 +10,8 @@ const {
     ReviewListService,
     DetailsService,
     BrandListService,
-    CreateReviewService
+    CreateReviewService,
+    ListByFilteServive
 } = require('../Servies/ProductServices');
 
 exports.ProducBrandList = async (req,res)=>{
@@ -41,6 +42,10 @@ exports.ProductListByRemark = async (req,res)=>{
     return res.status(200).json(result);  
 }
 
+exports.ListByFilte = async (req,res)=>{
+    let result = await ListByFilteServive(req);
+    return res.status(200).json(result);
+}
 
 
 

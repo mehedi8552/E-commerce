@@ -1,7 +1,7 @@
 
 
 const mongoose = require("mongoose");
-const ProductModel = require("../models/ProductModel");
+//const ProductModel = require("../models/ProductModel");
 const CartModel = require("../models/CardModel");
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -44,37 +44,27 @@ const SaveCartListService = async (req)=>{
  }
 
  const CartListService = async (req)=>{
-    try{
-
+    try {
         let user_id=new ObjectId(req.headers.user_id);
-        //console.log(req.headers);
-      
+        let matchStage={$match:{userID:user_id}}
 
-        let matchStage= {$match: {userID:user_id}}
-        //console.log(userID);
-        let JoinStageProduct={$lookup: {from: "products", localField: "productID", foreignField: "_id", as: "product"}};
-        let unwindProductStage={$unwind: "$product"}
+        let JoinStageProduct={$lookup:{from:"products",localField:"productID",foreignField:"_id",as:"product"}}
+        let unwindProductStage={$unwind:"$product"};
 
-        let JoinStageBrand={$lookup: {from: "brands", localField: "product.brandID", foreignField: "_id", as: "brand"}};
-        let unwindBrandStage={$unwind: "$brand"}
+        let JoinStageBrand={$lookup:{from:"brands",localField:"product.brandID",foreignField:"_id",as:"brand"}}
+        let unwindBrandStage={$unwind:"$brand"};
 
-        let JoinStageCategory={$lookup: {from: "categories", localField: "product.categoryID", foreignField: "_id", as: "category"}};
-        let unwindCategoryStage={$unwind: "$category"}
+        let JoinStageCategory={$lookup:{from:"categories",localField:"product.categoryID",foreignField:"_id",as:"category"}}
+        let unwindCategoryStage={$unwind:"$category"};
 
-        let projectionStage= {$project: {'_id': 0,
-                'userID': 0, 'createdAt':0,
-                'updatedAt':0,'product._id':0,
+        let projectionStage={$project:{
+                '_id':0,'userID':0,'createAt':0,'updatedAt':0, 'product._id':0,
                 'product.categoryID':0,'product.brandID':0,
                 'brand._id':0,'category._id':0,
-        }}
-
-        // let projectionStage = {$project:{
-        //     'color':1,
-        //     'qty':1,
-        //     'size':1
-        // }}
-
-        let data= await CartModel.aggregate([
+            }
+        }
+        
+        let data=await CartModel.aggregate([
             matchStage,
             JoinStageProduct,
             unwindProductStage,
@@ -85,7 +75,8 @@ const SaveCartListService = async (req)=>{
             projectionStage
         ])
 
-        return {status:"success", data:data}
+
+        return {status:"success",data:data}
     }
  
      catch (e) {
